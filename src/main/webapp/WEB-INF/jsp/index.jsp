@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<title></title>
 <style>
 a:link, a:visited {
   background-color: #f44336;
