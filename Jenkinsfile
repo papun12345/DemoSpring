@@ -12,7 +12,7 @@ pipeline{
                 ])
                 }
             }
-        }
+     
              stage ('build & Test'){
             steps{
                 sh "mvn clean install"
@@ -29,7 +29,7 @@ pipeline{
                 
                 sh "mvn sonar:sonar -Dsonar.host.url=http://3.14.251.87:9000"
             }
-        }
+       
         
          stage ('Uploading  to nexus'){
             steps{
@@ -59,4 +59,5 @@ pipeline{
       slackSend (color: 'danger', message: "Breakdown: Job '${JOB_NAME} with built number:${BUILD_NUMBER}'")
     }
 }
-
+}
+}
