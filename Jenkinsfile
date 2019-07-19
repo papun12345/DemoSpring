@@ -48,7 +48,7 @@ pipeline{
             }
         }
          }
-         
+   }
            post {
     success {
       slackSend (color: 'good', message: "Complete: Job '${JOB_NAME} with built number:${BUILD_NUMBER}'")
@@ -58,5 +58,4 @@ pipeline{
     }
 }
    }
-}
 
