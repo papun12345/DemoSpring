@@ -21,9 +21,9 @@ pipeline{
         }
          stage('Sonar') 
          {
-           //environment {
-           //scannerHome=tool 'sonar scanner'
-               tool name: 'sonar scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+           environment {
+           scannerHome=tool 'sonar scanner'
+           }
        }
             steps {
                 
