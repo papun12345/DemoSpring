@@ -4,8 +4,7 @@ pipeline{
     stages{
         stage('checkout'){
             steps{
-                withCredentials([string(credentialsId: 'Ashish_DemoGit', variable: 'bizeet')]) {
-                echo "My password is '${bizeet}'!"
+                withCredentials([string(credentialsId: 'Ashish_DemoGit', variable: 'bizeet')]) 
                 checkout([$class: 'GitSCM',
                 branches: [[name: 'origin/dev']],
                 extensions: [[$class: 'WipeWorkspace']],
@@ -22,8 +21,9 @@ pipeline{
         }
          stage('Sonar') 
          {
-           environment {
-           scannerHome=tool 'sonar scanner'
+           //environment {
+           //scannerHome=tool 'sonar scanner'
+               tool name: 'sonar scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
        }
             steps {
                 
