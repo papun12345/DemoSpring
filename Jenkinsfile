@@ -57,5 +57,5 @@ pipeline{
       slackSend (color: 'danger', message: "Breakdown: Job '${JOB_NAME} with built number:${BUILD_NUMBER}'")
     }
 }
-   }
+}
 
