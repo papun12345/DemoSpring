@@ -53,10 +53,10 @@ pipeline{
     }}
            post {
     success {
-      slackSend (color: 'good', message: "Complete: Job '${JOB_NAME} with    [${BUILD_NUMBER}]'")
+      slackSend (color: 'good', message: "Complete: Job '${JOB_NAME} with built number:${BUILD_NUMBER}'")
     }
     failure {
-      slackSend (color: 'danger', message: "Breakdown: Job '${JOB_NAME} with [${BUILD_NUMBER}]'")
+      slackSend (color: 'danger', message: "Breakdown: Job '${JOB_NAME} with built number:${BUILD_NUMBER}'")
     }
 }
 }
