@@ -1,7 +1,6 @@
 pipeline{
     agent any
-   
-    stages{
+   stages{
         stage('checkout'){
             steps{
                 withCredentials([string(credentialsId: 'Ashish_DemoGit', variable: 'bizeet')]) 
@@ -31,22 +30,24 @@ pipeline{
         
          stage ('Uploading  to nexus'){
             steps{
-             withCredentials([usernamePassword(credentialsId: 'Bizeet_nexus', passwordVariable: 'pass', usernameVariable: 'usr')]) {
+             withCredentials([usernamePassword(credentialsId: 'Bizeet_nexus', passwordVariable: 'pass', usernameVariable: 'usr')]) 
+                {
      sh   'curl -u $usr:$pass --upload-file target/springapp-${BUILD_NUMBER}.war http://3.14.251.87:8081/nexus/content/repositories/devopstraining/Bizeet_Nexus_Test3/springapp-${BUILD_NUMBER}.war'
-}
-            
+}           
         }
-        }
-        
+         }
+  
          stage ('Deploy'){
             steps{
-                 withCredentials([usernamePassword(credentialsId: 'devops-tomcat', passwordVariable: 'pass', usernameVariable: 'userId')]) {
+                 withCredentials([usernamePassword(credentialsId: 'devops-tomcat', passwordVariable: 'pass', usernameVariable: 'userId')]) 
+                {
         
                    
                      sh 'curl -u $userId:$pass http://ec2-18-224-182-74.us-east-2.compute.amazonaws.com:8080/manager/text/undeploy?path=/Ashis_DEMO'
                     sh 'curl -u  $userId:$pass --upload-file target/springapp-${BUILD_NUMBER}.war http://ec2-18-224-182-74.us-east-2.compute.amazonaws.com:8080/manager/text/deploy?config=file:/var/lib/tomcat8/springapp-${BUILD_NUMBER}.war\\&path=/Ashis_DEMO'
             }
         }
+         }
          
            post {
     success {
@@ -56,6 +57,6 @@ pipeline{
       slackSend (color: 'danger', message: "Breakdown: Job '${JOB_NAME} with built number:${BUILD_NUMBER}'")
     }
 }
+   }
 }
-}
-}
+
